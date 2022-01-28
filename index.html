@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
 </head>
 <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
+  <div class="header">
+    <h1>Rock, Paper, Scissors</h1>
+    <p class="header-desc">First to 5 Wins!</p>
+  </div>
 
-    <div class="result"></div>
-    <div id="player-score"></div>
-    <div id="computer-score"></div>
-    <div id="winner"></div>
+  <div class="result-container">
+    <div class="rps-image-container">
+      <div class="rps-image-title">You</div>
+      <div class="rps-image">
+        <img src="" alt="" id="player-choice">
+      </div>
+      <div id="player-score">0</div>
+    </div>
+
+    <div class="result-middle">
+      <div id="result-text"></div>
+      <button id="play-again-btn" hidden>Play Again</button>
+    </div>
+    
+    <div class="rps-image-container">
+      <div class="rps-image-title">Computer</div>
+      <div class="rps-image">
+        <img src="" alt="" id="computer-choice">
+      </div>
+      <div id="computer-score">0</div>
+    </div>
+  </div>
+  
+  <div class="rps-btn-container">
+    <button class="rps-btn" value="rock">
+      <img src="./images/rock.png" alt="" id="rock">
+    </button>
+    <button class="rps-btn" value="paper">
+      <img src="./images/paper.png" alt="" id="paper">
+    </button>
+    <button class="rps-btn" value="scissors">
+      <img src="./images/scissors.png" alt="" id="scissors">
+    </button>
+  </div>
+  
+  <div class="footer">
+    <p>Coded by: <a href="https://github.com/mahesa10" target="_blank">mahesa10</a> | Icons by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" target="_blank">Vitaly Gorbachev - Flaticon</a></p>
+  </div>
 </body>
 </html>

@@ -1,4 +1,12 @@
 const RPS = ["rock", "paper", "scissors"];
+const rpsBtn = document.querySelectorAll('.rps-btn');
+const headerDesc = document.querySelector('.header-desc')
+const playAgainBtn = document.querySelector('#play-again-btn');
+const result = document.querySelector("#result-text");
+const playerScoreDisplay = document.querySelector('#player-score');
+const computerScoreDisplay = document.querySelector('#computer-score');
+const playerChoiceDisplay = document.querySelector('#player-choice');
+const computerChoiceDisplay = document.querySelector('#computer-choice');
 
 function computerPlay() {
     let randomNum = Math.floor(Math.random() * RPS.length);
@@ -9,59 +17,85 @@ let playerScore = 0;
 let computerScore = 0;
 
 function displayScoreAndWinner() {
-    const playerScoreDisplay = document.querySelector('#player-score');
-    const computerScoreDisplay = document.querySelector('#computer-score');
 
-    playerScoreDisplay.textContent = `Your Score: ${playerScore}`;
-    computerScoreDisplay.textContent = `Computer Score: ${computerScore}`;
+    playerScoreDisplay.textContent = `${playerScore}`;
+    computerScoreDisplay.textContent = `${computerScore}`;
 
-    const winnerDisplay = document.querySelector('#winner')
     if (playerScore === 5) {
-        winnerDisplay.textContent = "Congrats! You are the Winner";
+        headerDesc.textContent = "Congrats! You are the Winner";
+        rpsBtn.forEach(btn => {
+            btn.disabled = true;
+        })
+        playAgainBtn.hidden = false;
     } else if (computerScore === 5) {
-        winnerDisplay.textContent = "Sorry, Computer Wins";
+        headerDesc.textContent = "Sorry, Computer Wins";
+        rpsBtn.forEach(btn => {
+            btn.disabled = true;
+        })
+        playAgainBtn.hidden = false;
     }
 }
 
+function showRPS(playerChoice, computerChoice) {
+    playerChoiceDisplay.src = `./images/${playerChoice}.png`;
+    computerChoiceDisplay.src = `./images/${computerChoice}.png`;
+}
+
 function playRound(e) {
-    let playerSelection = e.target.id;
+    let playerSelection = e.currentTarget.value;
     let computerSelection = computerPlay();
-    let result = document.querySelector(".result");
 
     if (computerSelection === "rock" && playerSelection === "paper") {
         playerScore++
-        result.textContent = "You Won! Paper beats Rock";
+        result.textContent = "You Win!";
     } else if (computerSelection === "rock" && playerSelection === "scissors") {
         computerScore++
-        result.textContent = "You Lose! Rock beats Scissors";
+        result.textContent = "You Lose!";
     } else if (computerSelection === "rock" && playerSelection === "rock") {
-        result.textContent = "You Draw ! Rock meets Rock";
+        result.textContent = "It's a tie!";
     }
     
     if (computerSelection === "paper" && playerSelection === "scissors") {
         playerScore++
-        result.textContent = "You Won! Scissors beats Paper";
+        result.textContent = "You Win!";
     } else if (computerSelection === "paper" && playerSelection === "rock") {
         computerScore++
-        result.textContent = "You Lose! Paper beats Rock";
+        result.textContent = "You Lose!";
     } else if (computerSelection === "paper" && playerSelection === "paper") {
-        result.textContent = "You Draw ! Paper meets Paper";
+        result.textContent = "It's a tie!";
     }
     
     if (computerSelection === "scissors" && playerSelection === "rock") {
         playerScore++
-        result.textContent = "You Won! Rock beats Scissors";
+        result.textContent = "You Win!";
     } else if (computerSelection === "scissors" && playerSelection === "paper") {
         computerScore++
-        result.textContent = "You Lose! Scissors beats Paper";
+        result.textContent = "You Lose!";
     } else if (computerSelection === "scissors" && playerSelection === "scissors") {
-        result.textContent = "You Draw ! Scissors meets Scissors";
+        result.textContent = "It's a tie!";
     }
 
     displayScoreAndWinner();
+    showRPS(playerSelection, computerSelection);
 }
 
-const buttons = document.querySelectorAll('button');
-buttons.forEach(btn => {
-    btn.addEventListener('click', playRound)
+rpsBtn.forEach(btn => {
+    btn.addEventListener('click', playRound);
 })
+
+function playAgain() {
+    result.textContent = "";
+    playerScore = 0;
+    computerScore = 0;
+    headerDesc.textContent = "First to 5 Wins!";
+    rpsBtn.forEach(btn => {
+        btn.disabled = false;
+    });
+    playAgainBtn.hidden = true;
+    playerScoreDisplay.textContent = "0";
+    computerScoreDisplay.textContent = "0";
+    playerChoiceDisplay.src = "";
+    computerChoiceDisplay.src = "";
+}
+
+playAgainBtn.addEventListener('click', playAgain);
